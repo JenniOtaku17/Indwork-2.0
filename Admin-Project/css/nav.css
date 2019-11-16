@@ -1,0 +1,44 @@
+.foto-nav {
+    width: 100%;
+    max-width: 40px;
+    clip-path: circle(40% at 50% 50%);
+    margin-right: 7px;
+}
+
+.perfil-nav {
+    padding: 0px 10px;
+    background-color: #169BD5;
+    border-radius: 80px;
+    color: azure;
+    transition-duration: 0.3s;
+}
+
+.perfil-nav:hover {
+    background-color: azure;
+    color: black;
+    transition-duration: 0.5s;
+}
+
+
+*.icon-white {color: white}
+i {   
+    width:100px;
+    text-align:center;
+    vertical-align:middle;
+    position: relative;
+}
+.badge:after{
+    position: absolute;
+    background: rgba(0,0,255,1);
+    height:2rem;
+    top:1rem;
+    right:1.5rem;
+    width:2rem;
+    text-align: center;
+    line-height: 2rem;;
+    font-size: 1rem;
+    border-radius: 50%;
+    color:white;
+    border:1px solid blue;
+}
+
