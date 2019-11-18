@@ -5,10 +5,10 @@ error_reporting(0);
 include ('conexion.php');
 
 mysqli_set_charset($conexion,'utf8');
-$calificacion=mysqli_query($conexion,"select p.NOMBRE,p.APELLIDO,p.FOTO,p.ID,e.COMENTARIO,e.FECHA,e.ESTRELLAS
-from profesional p inner join evaluacion e
-on e.ID_EMISOR = p.ID
-where ID_RECEPTOR = '$id'") or
+$calificacion=mysqli_query($conexion,"select p.NOMBRE,p.APELLIDO,p.FOTO,c.ID_EMISOR,c.ID_RECEPTOR,p.ID,e.ID_CONTRA,e.COMENTARIO,e.FECHA,e.ESTRELLAS 
+from evaluacion e inner join contratos c on e.ID_CONTRA = c.ID 
+inner join profesional p on c.ID_EMISOR = p.ID 
+where C.ID_RECEPTOR = '$id'") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 

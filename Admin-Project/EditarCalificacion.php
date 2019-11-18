@@ -16,7 +16,13 @@
 
 if(isset($_GET['id_re'])){
 }
-$id_contra = $_GET['id_contra']
+$id_contra = $_GET['id_contra'];
+include 'conexion.php';
+$registros=mysqli_query($conexion,"select COMENTARIO FROM evaluacion
+                        where ID_CONTRA='$id_contra'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
 ?>
 
 <section class="container">
@@ -25,7 +31,7 @@ $id_contra = $_GET['id_contra']
 	<a href="vssolicitudes.php"><button  class="btn btn-primary mb-2 primary">Cancelar</button></a>
   </div>
 	<h2 align="center">Calificar</h2><br>
-	<form action="calificar1.php?id_contra=<?php echo $id_contra ;?>" method="post">
+	<form action="EditarCalificacion1.php?id_contra=<?php echo $id_contra ;?>" method="post">
 
     <div class="clasificacion">
           <input id="radio1" type="radio" name="estrellas" value="★★★★★" >
@@ -41,7 +47,7 @@ $id_contra = $_GET['id_contra']
         </div>
 <br>
 	<label class="mr-sm-2">Comentario:</label>
-	<textarea rows="4" name="comentario" class="form-control mb-2 mr-sm-2"></textarea><br>
+	<textarea rows="4" name="comentario" class="form-control mb-2 mr-sm-2" value="<?php echo $reg['COMENTARIO'] ?>"></textarea><br>
 
 	<br>
    <div align="center" class="center">
@@ -50,7 +56,10 @@ $id_contra = $_GET['id_contra']
 	</form>
   </div>
 </section>
+<?php
+}
 
+?>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

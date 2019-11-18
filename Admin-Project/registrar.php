@@ -66,6 +66,10 @@
                                     <input type="text" name="apellido" class="form-control" required><br>
                                 </div>
                             </div>
+                            <div class="arriba ">
+                                <label>Facebook:</label>
+                                <input type="text" name="fb" class="form-control" placeholder="Ingresa el link de tu perfil" required><br>
+                            </div>
                         </div>
                     </div>
                     <!-----------------Datos Profesionales------------------->
@@ -112,8 +116,10 @@
                                 <input type="text" name="region" class="form-control"><br>
 
                                 <label>Telefono:</label>
-                                <input type="text" name="telefono" class="form-control"><br>
-
+                                <div class="input-group mb-3">
+                                <input type="text" name="prefijo" class="form-control" placeholder="Prefijo Ej: +1"><br>
+                                <input type="text" name="telefono" class="form-control" placeholder="Numero telefonico"><br>
+                                </div>
                                 <label>Direccion:</label>
                                 <input type="text" name="direccion" class="form-control"><br>
                             </div>

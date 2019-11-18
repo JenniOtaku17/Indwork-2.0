@@ -40,7 +40,7 @@
 error_reporting(0);
 
 include ('conexion.php');
-$registros=mysqli_query($conexion,"select ID, CEDULA,NOMBRE,CV,FOTO,PASSWORD,OFICIO,APELLIDO,TELEFONO,DIRECCION,REGION,PAIS,ME from profesional where CORREO ='$_REQUEST[correo]' or ID='$_GET[id]'") or
+$registros=mysqli_query($conexion,"select ID, CEDULA, FB,NOMBRE,CV,FOTO,PASSWORD,OFICIO,APELLIDO,TELEFONO,DIRECCION,REGION,PAIS,ME from profesional where CORREO ='$_REQUEST[correo]' or ID='$_GET[id]'") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 while ($reg=mysqli_fetch_array($registros))
@@ -54,6 +54,8 @@ while ($reg=mysqli_fetch_array($registros))
 			<img class="foto" src="data:image/jpg;base64,'.base64_encode($reg['FOTO']).'" alt="">
 		</div>
 		<div class="cuadro-derecha ">
+		<a href="https://api.whatsapp.com/send?phone='.$reg['TELEFONO'].'"><img src="img/whatsapp.png" width="50" height="50"></a>
+		<a href="'.$reg['FB'].'"><img src="img/facebook.png" width="50" height="50"></a>
 			<div>
 				<p class="nombre-perfil">'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
 			</div>

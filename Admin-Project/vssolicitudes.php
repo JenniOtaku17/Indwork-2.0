@@ -69,16 +69,16 @@ session_start();
 $id = $_SESSION['user'];
 
 mysqli_set_charset($conexion,'utf8');
-$registrost=mysqli_query($conexion,"Select c.ID,c.ID_RECEPTOR, c.ID_EMISOR, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO
+$registrost=mysqli_query($conexion,"Select c.ID,c.ID_RECEPTOR, c.ID_EMISOR, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO, c.ESTADO
 From contratos c inner join profesional p
 On c.ID_RECEPTOR = p.ID
- where ID_EMISOR = '$id' and FECHA_FIN != ' ' and ESTADO = 'Terminado' ") or
+ where ID_EMISOR = '$id' and FECHA_FIN != ' ' and (ESTADO = 'Terminado' or ESTADO = 'Valorado' )") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 
 while($tr =mysqli_fetch_array($registrost)){
 
-  $id_re = $tr['ID_RECEPTOR'];
+  $id_contra= $tr['ID'];
 
 echo"
 
@@ -86,10 +86,17 @@ echo"
 
 <td>{$tr['NOMBRE']} {$tr['APELLIDO']}</td>
 <td>{$tr['ASUNTO']}</td>
-<td>{$tr['DESCRIPCION']}</td>
-<td> <a href ='calificar.php?id_re=".$id_re."' class ='btn btn-success'>Valorar Trabajo</a> </td>
+<td>{$tr['DESCRIPCION']}</td>";
 
-</tr>";
+if($tr['ESTADO'] == 'Valorado') {
+  echo "<td> <a href ='EditarCalificacion.php?id_contra=".$id_contra."' class ='btn btn-success'>Editar Valoracion</a> </td>
+
+  </tr>";
+}else{
+  echo "<td> <a href ='calificar.php?id_contra=".$id_contra."' class ='btn btn-success'>Valorar Trabajo</a> </td>
+
+  </tr>";
+}
 
 }
 
@@ -239,7 +246,7 @@ mysqli_set_charset($conexion,'utf8');
 $rg=mysqli_query($conexion,"Select c.ID, c.ID_EMISOR,c.FECHA_INICIO,c.FECHA_FIN, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO
 From contratos c inner join profesional p
 On c.ID_EMISOR = p.ID
-where id_receptor = '$id' and ESTADO= 'Terminado'") or
+where id_receptor = '$id' and (ESTADO= 'Terminado' or ESTADO = 'Valorado')") or
 die("Problemas en el select:".mysqli_error($conexion));
 
 while($tb =mysqli_fetch_array($rg)){

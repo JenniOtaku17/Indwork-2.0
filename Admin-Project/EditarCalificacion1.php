@@ -30,18 +30,16 @@
 
   
 
-        mysqli_query($conexion,"insert into evaluacion (COMENTARIO,ESTRELLAS,ID_CONTRA) values ('$_REQUEST[comentario]','$_REQUEST[estrellas]', $id_contra)")
+        mysqli_query($conexion,"update evaluacion set COMENTARIO = '$_REQUEST[comentario]', ESTRELLAS = '$_REQUEST[estrellas]'
+        WHERE ID_CONTRA = '$id_contra'")
           or die("Problemas en el select".mysqli_error($conexion));
 
-        mysqli_query($conexion,"update contratos set ESTADO = 'Valorado' where ID = '$id_contra'")
-        or die("Problemas en el select".mysqli_error($conexion));
-
-          echo "<script> alertify.alert('INDWORK aviso','Calificación enviada exitosamente!',
+          echo "<script> alertify.alert('INDWORK aviso','Calificación actualizada exitosamente!',
           function(){ alertify.message('OK'); window.location= 'vssolicitudes.php?id=".$id."'; }); </script>";
          }
          else{
-             echo "<script> alertify.alert('INDWORK aviso','Error al calificar!',
-          function(){ alertify.message('OK'); window.location= 'calificar.php?id=".$id_contra."'; }); </script>";
+             echo "<script> alertify.alert('INDWORK aviso','Error al actualizar calificacion!',
+          function(){ alertify.message('OK'); window.location= 'EditarCalificacion.php?id=".$id_contra."'; }); </script>";
          }
          
 
