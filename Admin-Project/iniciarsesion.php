@@ -57,6 +57,7 @@ if(isset($_SESSION['user'])){
   </button>
   <div class="sign-up">
      No tienes una cuenta? <a href="registrar.php">Registrate</a>
+     ¿Olvidaste tu contraseña? <a href="recuperar.php">Recupérala Aquí</a>
   </div>
   </form>
   </div>

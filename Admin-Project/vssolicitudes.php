@@ -34,10 +34,13 @@
           <a class="nav-link" href="#section2">Solicitudes de Trabajo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#section3">Trabajos en progreso</a>
+          <a class="nav-link" href="#section3">Trabajos en progreso (emitidos)</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#section4">Trabajos Realizados</a>
+          <a class="nav-link" href="#section4">Trabajos en progreso (recibidos)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section5">Trabajos Realizados</a>
         </li>
 
       </ul>
@@ -168,7 +171,7 @@ echo"
 
       <!-- section 3 -->    
       <div id="section3" class="bg-info">         
-      <br><h2 align="center" class="tema-tabla">Trabajos en Progreso</h2><br>
+      <br><h2 align="center" class="tema-tabla">Trabajos en Progreso (emitidos)</h2><br>
   <table class = 'table table-stripped'>
 
   <thead>
@@ -222,8 +225,60 @@ echo"
 
       </div>
 
-      <!-- section 4 -->
-      <div id="section4" class="bg-info">         
+            <!-- section 4 -->    
+            <div id="section4" class="bg-info">         
+      <br><h2 align="center" class="tema-tabla">Trabajos en Progreso</h2><br>
+  <table class = 'table table-stripped'>
+
+  <thead>
+
+  <tr>
+
+  <th>Contratado</th>
+  <th>Asunto</th>
+  <th>Descripcion</th>
+  <th>Fecha</th>
+
+  </tr>
+
+  </thead>
+
+  <tbody>
+  <?php 
+
+$rg=mysqli_query($conexion,"Select c.ID, c.ID_RECEPTOR,c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO
+From contratos c inner join profesional p
+On c.ID_RECEPTOR = p.ID
+ where id_EMISOR = '$id' and ESTADO= 'Aceptado'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+
+while($tb =mysqli_fetch_array($rg)){
+
+$id_contra = $tb['ID'];
+
+echo"
+
+<tr>
+
+<td>{$tb['NOMBRE']} {$tb['APELLIDO']}</td>
+<td>{$tb['ASUNTO']}</td>
+<td>{$tb['DESCRIPCION']}</td>
+<td>{$tb['FECHA_INICIO']}</td>
+
+
+</tr>";
+
+}
+
+?>
+
+</tbody>
+</table>
+
+      </div>
+
+      <!-- section 5 -->
+      <div id="section5" class="bg-info">         
       <br><h2 align="center" class="tema-tabla">Trabajos Realizados</h2><br>
   <table class = 'table table-stripped'>
 
