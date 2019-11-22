@@ -212,7 +212,8 @@ echo"
 <td>{$tb['ASUNTO']}</td>
 <td>{$tb['DESCRIPCION']}</td>
 <td>{$tb['FECHA_INICIO']}</td>
-<td> <a href ='solicitudes.php?id=".$id_contra."&estado=".$terminar."&usuario=".$id."' class ='btn btn-success'>Terminar</a> </td>
+<td> <a href ='avances.php?id=".$id_contra."' class ='btn btn-success'>Agregar Avance</a>
+<a href ='solicitudes.php?id=".$id_contra."&estado=".$terminar."&usuario=".$id."' class ='btn btn-success'>Terminar</a> </td>
 
 </tr>";
 
@@ -227,7 +228,7 @@ echo"
 
             <!-- section 4 -->    
             <div id="section4" class="bg-info">         
-      <br><h2 align="center" class="tema-tabla">Trabajos en Progreso</h2><br>
+      <br><h2 align="center" class="tema-tabla">Trabajos en Progreso (Recibidos)</h2><br>
   <table class = 'table table-stripped'>
 
   <thead>

@@ -1,3 +1,7 @@
+<?php
+	    include ('navbar.php');
+    ?>
+
 <!doctype html>
 <html>
 
@@ -16,10 +20,84 @@
 
     <!-----------------Navigation------------------->
 
-    <?php
-	    include ('navbar.php');
-    ?>
-    
+    <style>
+
+*{
+    box-sizing: border-box;
+}
+
+h1{
+font-size: 2em;
+}
+.contenedor-registrar{
+    width: 100%;
+}
+
+@media screen and (max-width: 600px){
+    .contenedor-registro {
+width: 98%;
+margin: 50px auto;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+-webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none
+}
+
+.contenedor-registro input{
+width: 98%;
+}
+
+.zona-izquierda {
+width: 100%;
+}
+
+.flex-zona-izquierda {
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+align-content: center;
+justify-content: center;
+}
+
+input[type="radio"]{
+width: 20%;
+}
+
+.zona-derecha {
+width: 100%;
+}
+
+.abajo-flex {
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+}
+
+.subtitulo {
+/*width: 80%;*/
+font-size: 1.2em;
+margin: 5px auto;
+text-align: center;
+}
+
+.contenedor-registro label{
+font-size: 1em;
+}
+
+.vl2 {
+border-right: none;
+height: 0;
+border-bottom: 1px solid gray;
+width: 90%;
+margin: 5% auto;
+padding: 2%;
+}
+}
+
+</style>
+
 
     <br>
 

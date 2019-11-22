@@ -1,3 +1,7 @@
+
+<?php
+        include ('navbar.php');
+    ?>
 <!doctype html>
 <html>
 
@@ -13,9 +17,6 @@
 </head>
 <body>
 
-<?php
-        include ('navbar.php');
-    ?>
     <!--------------------Container------------------------>
 
     <div id="demo" class="carousel slide" data-ride="carousel">
@@ -52,6 +53,37 @@
         </a>
     </div>
 
+    <style>
+        @media screen and (max-width: 600px) {
+        .categoria {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        .parrafo {
+            width: 90%;
+            margin: 70px auto;
+            text-align: center;
+        }
+        .contratante {
+            width: 90%;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: center;
+        }
+        .vl {
+            border-right: none;
+            border-bottom: 1px solid gray;
+            width: 90%;
+            margin: 0 auto;
+        }
+    }
+        </style>
 
 
     <div class="categoria ">
