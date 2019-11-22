@@ -184,31 +184,20 @@
 
 <?php
 
-error_reporting(0);
 
-$base = new PDO('mysql:host=localhost; dbname=indwork','root','');
-	$base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $base->exec("SET CHARACTER SET utf8");
-  
-  $buscar='';
-	if(isset($_POST['op'])){
-		$buscar = $_POST['op'];
-	}
+include ('conexion.php');
 
-  $sql="SELECT NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar' or PAIS like '%$buscar%' or ME LIKE '%$buscar%' or APELLIDO LIKE '%$buscar%'";
-	$resultado = $base->query($sql);
-	$reg = $resultado->fetch(PDO::FETCH_ASSOC);
-	$total = count($reg);
+$buscar = '';
 
-	if($total>0 && $buscar != ''){
+if(isset($_POST['op'])){
 
-//if(isset($_POST['op'])){
+$buscar = $_POST['op'];
 
-//$registros=mysqli_query($conexion,"select NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar' or PAIS like '%$buscar%' or ME LIKE '%$buscar%' or APELLIDO LIKE '%$buscar%' LIMIT 5") or
-  //die("Problemas en el select:".mysqli_error($conexion));
+$registros=mysqli_query($conexion,"select NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar' or PAIS like '%$buscar%' or ME LIKE '%$buscar%' or APELLIDO LIKE '%$buscar%'") or
+  die("Problemas en el select:".mysqli_error($conexion));
 
 
-while ($reg = $resultado->fetch(PDO::FETCH_ASSOC))
+while ($reg=mysqli_fetch_array($registros))
 {
 
    echo 
@@ -232,27 +221,33 @@ while ($reg = $resultado->fetch(PDO::FETCH_ASSOC))
 		</div>
 		<div class="cuadro-derecha ">
 			<div>
-				<p class="nombre-perfil centrado" >'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
+				<p class="nombre-perfil" >'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
 			</div>
 			<div>
-				<p class="oficio centrado">'.$reg['OFICIO'].'</p>
+				<p class="oficio">'.$reg['OFICIO'].'</p>
 			</div>
     </div>
-    <div class="visitar centrado ">
-      <a class="boton-perfil nada" href="perfil.php?id='.$reg['ID'].'"> Visitar Perfil </a>
+    <div class="visitar centrado">
+      <a class="boton nada" href="perfil.php?id='.$reg['ID'].'"> Visitar Perfil </a>
       </div>
     </div>
 	</div>
   </tr></tbody></table></div>
+  
   ';
+  
+
 }}
 
 else{
+
 echo "Revise los datos";
+
 }
 
+
 ?>
+
 	</section>
- 
 </body>
 </html>

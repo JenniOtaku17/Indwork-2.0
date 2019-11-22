@@ -9,6 +9,7 @@ e.preventDefault();
 $("#op").keyup(function(){
    
     var envio = $('#op').val();
+    $('#respuesta-q').html('<h4>Cargando</h4>');
 
 $.ajax(
 {

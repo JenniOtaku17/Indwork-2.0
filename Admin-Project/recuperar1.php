@@ -39,11 +39,16 @@ while ($reg=mysqli_fetch_array($registros))
         mysqli_query($conexion,"update profesional set PASSWORD = '$password' where CORREO = '$correo'")
         or die("Problemas en el select".mysqli_error($conexion));
 
-        mail($correo, 'INDWORK ACTUALIZACION', 'Hemos actualizado su contraseña, La nueva contraseña es: '.$password)
+        $name = "INDWORK ACTUALIZACION";
+        $asunto = "Cambio de contrasena";
+        $msg = "Hemos actualizado su contrasena, su nueva contrasena es: ".$password;
+        $header = "From: indworkcompany@gmail.com";
+        $mail = mail($correo,$asunto,$msg,$header);
 
+        echo "<script> alertify.alert('INDWORK aviso','Hemos enviado una nueva contrasena a tu correo', function(){ alertify.message('OK'); window.location= 'iniciarsesion.php'; }); </script>";
 
     }catch(Exception $e){
-        echo "<script> alertify.alert('INDWORK aviso','No fue posible enviar el mensaje', function(){ alertify.message('OK'); window.location= 'iniciarsesion.php'; }); </script>";
+        echo "<script> alertify.alert('INDWORK aviso','No fue posible enviar el mensaje', function(){ alertify.message('OK'); window.location= 'recuperar.php'; }); </script>";
     }
 
 }

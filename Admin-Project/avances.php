@@ -15,18 +15,15 @@
 <section class="container">
 
 	<div class="form-group w-75">
-    <br>
-<br>
-<br>
-<br>
+
 <br>
 <?php
-if(isset($_GET['id_contra'])){
+if(isset($_GET['id'])){
 
-$id_contra= $_GET['id_contra'];
+$id_contra= $_GET['id'];
 
 echo '<h2 align="center">Da a conocer tu avance!</h2><br>
-	<form action="avances1.php?id_contra=<?php echo $id_contra; ?>" method="post">
+	<form action="avances1.php?id='.$id_contra.'" method="post">
 
 	<label class="mr-sm-2">Porcentaje Avanzado:</label>
 	<input name="porcentaje" class="form-control mb-2 mr-sm-2"></textarea><br>
@@ -35,7 +32,7 @@ echo '<h2 align="center">Da a conocer tu avance!</h2><br>
 
 	<br>
    <div align="center" class="center">
-	<input type="submit" class="enviar btn btn-primary " value="Enviar Contraseña" class="btn btn-primary mb-2">
+	<input type="submit" class="enviar btn btn-primary " value="Agregar avance" class="btn btn-primary mb-2">
   </div>
 	</form>
   </div>
