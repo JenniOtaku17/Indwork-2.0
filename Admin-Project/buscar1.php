@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="shortcut icon" href="icono.png" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
 </head>
 
 <body>
@@ -25,22 +27,188 @@
 <section class="container" align="center" >
   <h1>Perfiles Recomendados</h1><br>
   <hr>
+
+<style>
+
+.boton-perfil {
+        background-color: #169BD5;
+        padding: 3%;
+        color: white;
+        border-radius: 25px;
+        transition-duration: 0.5s;
+        margin: 5px auto;
+        border: 2px solid #169BD5;
+        text-align: center;
+        font-size: 1em;
+        width: 90%;
+  }
+
+* { box-sizing:border-box; }
+
+.valoracion{
+	width: 100%;
+	display: block;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+
+.minimenu{
+	width: 100%;
+}
+
+.visitar{
+  width: 20%;
+  margin: auto;
+}
+
+.buscador-text {
+    width: 100%;
+    border-style: none;
+    outline: none;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    padding: 10px;
+    transition-duration: 0.4s;
+    -webkit-box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
+}
+
+.buscador-text:focus {
+    border: 2px solid #169BD5;
+    transition-duration: 0.4s;
+}
+
+	@media screen and (max-width: 800px){
+		.cuadro {
+    width: 100%;
+    margin: 75px auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.foto {
+    width: 80%;
+    max-width: 200px;
+    border-radius: 200px;
+	clip-path: circle(40% at 50% 50%);
+	margin: 0px auto;
+}
+
+.visitar{
+  width: 90%;
+  margin: 10px auto;
+}
+
+.cuadro-izquierda {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.cuadro-derecha {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.borde-oscuro {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+	box-shadow: none;
+	width: 100%;
+    margin: 75px 0;
+	display: flex;
+	font-size: 1em;
+    flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content:baseline;
+	align-items: baseline;
+}
+
+.datos-izquierda {
+    display: flex;
+    flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+    width: 29%;
+}
+
+.datos-derecha {
+    display: flex;
+    flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+    width: 100%;
+}
+
+.datos-d {
+    text-align: left;
+    width: 80%;
+    margin: 20px auto;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.visible {
+    display: none;
+}
+
+.invisible {
+    display: block;
+}
+
+.datos-p {
+    text-align: left;
+    width: 80%;
+    margin: 20px auto;
+    font-size: 1em;
+    font-weight: 300;
+}
+
+.valoracion{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+	}
+
+</style>
+
+
 <?php
 
+error_reporting(0);
 
-include ('conexion.php');
+$base = new PDO('mysql:host=localhost; dbname=indwork','root','');
+	$base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $base->exec("SET CHARACTER SET utf8");
+  
+  $buscar='';
+	if(isset($_POST['op'])){
+		$buscar = $_POST['op'];
+	}
 
-$buscar = '';
+  $sql="SELECT NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar' or PAIS like '%$buscar%' or ME LIKE '%$buscar%' or APELLIDO LIKE '%$buscar%'";
+	$resultado = $base->query($sql);
+	$reg = $resultado->fetch(PDO::FETCH_ASSOC);
+	$total = count($reg);
 
-if(isset($_POST['op']) and empty($_POST['filtro'])){
+	if($total>0 && $buscar != ''){
 
-$buscar = $_POST['op'];
+//if(isset($_POST['op'])){
 
-$registros=mysqli_query($conexion,"select NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar'") or
-  die("Problemas en el select:".mysqli_error($conexion));
+//$registros=mysqli_query($conexion,"select NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar' or PAIS like '%$buscar%' or ME LIKE '%$buscar%' or APELLIDO LIKE '%$buscar%' LIMIT 5") or
+  //die("Problemas en el select:".mysqli_error($conexion));
 
 
-while ($reg=mysqli_fetch_array($registros))
+while ($reg = $resultado->fetch(PDO::FETCH_ASSOC))
 {
 
    echo 
@@ -64,106 +232,27 @@ while ($reg=mysqli_fetch_array($registros))
 		</div>
 		<div class="cuadro-derecha ">
 			<div>
-				<p class="nombre-perfil" >'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
+				<p class="nombre-perfil centrado" >'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
 			</div>
 			<div>
-				<p class="oficio">'.$reg['OFICIO'].'</p>
+				<p class="oficio centrado">'.$reg['OFICIO'].'</p>
 			</div>
     </div>
-    <div class="visitar centrado">
-      <a class="boton nada" href="perfil.php?id='.$reg['ID'].'"> Visitar Perfil </a>
+    <div class="visitar centrado ">
+      <a class="boton-perfil nada" href="perfil.php?id='.$reg['ID'].'"> Visitar Perfil </a>
       </div>
     </div>
 	</div>
   </tr></tbody></table></div>
-  
   ';
-  
-
 }}
 
 else{
-
 echo "Revise los datos";
-
-}
-
-
-
-if(isset($_POST['op']) and !empty($_POST['filtro'])){
-
-  $buscar = $_POST['op'];
-  $filtro = $_POST['filtro'];
-
-$registros=mysqli_query($conexion,"select NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where (OFICIO like '%$buscar%' or NOMBRE like '%$buscar%') and (REGION like '%$filtro%' or PAIS like '%$filtro%')") or
-  die("Problemas en el select:".mysqli_error($conexion));
-
-while ($reg=mysqli_fetch_array($registros))
-
-{
-   echo '<div class="container">
-   <table class="table tabla">
-   <thead class="thead-light encabezado">
-       <tr>
-
-       </tr>
-     </thead>
- <tbody>
-   <tr>
-   <div  class="container">
-
-   <div class="cuadro">
-   <div class="cuadro-izquierda ">
-     <a href="perfil.php?id='.$reg['ID'].'">
-     <img  class="foto" src="data:image/jpg;base64,'.base64_encode($reg['FOTO']).'" alt="">
-     </a>
-   </div>
-   <div class="cuadro-derecha ">
-     <div>
-       <p class="nombre-perfil" >'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
-     </div>
-     <div>
-       <p class="oficio">'.$reg['OFICIO'].'</p>
-     </div>
-   </div>
-   <div class="visitar centrado">
-     <a class="boton nada" href="perfil.php?id='.$reg['ID'].'"> Visitar Perfil </a>
-     </div>
-   </div>
- </div>
- </tr></tbody></table></div>';
-  
-
-}}
-
-if(empty($_POST['op']) and empty($_POST['filtro'])){
-  echo "
-
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <script> 
-  $('#respuesta-q').html('<h4>Tienes que insertar datos</h4>');
-  </script>
-  
-  ";
 }
 
 ?>
-
-
 	</section>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
-    <script type = "text/javascript" src = "ajax.js"></script>
+ 
 </body>
 </html>
