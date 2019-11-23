@@ -28,6 +28,10 @@
 <!--------------------Container------------------------>
 
   <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
   //error_reporting(0);
   if(isset($_POST['registrar']))
   {
@@ -49,12 +53,41 @@ mysqli_query($conexion,"insert into profesional (NOMBRE,APELLIDO,CEDULA,OFICIO,T
                        ('$_REQUEST[nombre]','$_REQUEST[apellido]','$_REQUEST[cedula]', '$_REQUEST[oficio]', '$_REQUEST[tipodeusuario]','$_REQUEST[pais]','$img','$nombre', $telefono, '$_REQUEST[direccion]','$_REQUEST[correo]','$_REQUEST[password]','$_REQUEST[region]','$_REQUEST[me]','$_REQUEST[fb]')")
   or die("Problemas en el select".mysqli_error($conexion));
 
-  $correo = $_REQUEST['correo'];
-  $asunto = 'BIENVENIDO A INDWORK';
-  $mensaje = $_REQUEST['nombre'].' '.$_REQUEST['apellido'].' la familia INDWORK le da una cordial Bienvenida!';
-  //mail($correo, $asunto , $mensaje);
-
+  require 'PHPMailer/vendor/autoload.php';
+  
+  $name = $_REQUEST['nombre'];
+  $mail = new PHPMailer(true);
+  
+  try {
+      $mail->SMTPDebug = 0;
+      $mail->isSMTP();
+  
+      $mail->Host = 'in-v3.mailjet.com';
+      $mail->SMTPAuth = true;
+  
+      $mail->Username = '9712ab0bbbf6cfd71813c1cadafa39af';
+      $mail->Password = 'bcbf5b9ecc15d2df8071a392539819fa';
+  
+      $mail->SMTPSecure = 'tls';
+      $mail->Port = 587;
+  
+      ## MENSAJE A ENVIAR
+      $mail->setFrom('indworkcompany@gmail.com');
+      $mail->addAddress($_REQUEST['correo']);
+  
+      $mail->isHTML(true);
+      $mail->Subject = 'Confirma tu cuenta de IndWork ' .$name;
+      $mail->Body = file_get_contents('PHPMailer/plantilla2.html');
+  
+      $mail->send();
+  
+  } catch (Exception $exception) {
+      echo 'Algo salio mal', $exception->getMessage();
+  }
+  
+  
 mysqli_close($conexion);
+
   echo "<script> alertify.alert('INDWORK aviso','Usuario registrado Exitosamente!', function(){ alertify.message('OK'); window.location= 'iniciarsesion.php'; }); </script>";
 }else
 {

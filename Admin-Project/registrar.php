@@ -146,7 +146,7 @@ padding: 2%;
                             </div>
                             <div class="arriba ">
                                 <label>Facebook:</label>
-                                <input type="text" name="fb" class="form-control" placeholder="Ingresa el link de tu perfil" required><br>
+                                <input type="text" name="fb" class="form-control" placeholder="Ingresa el link de tu perfil" ><br>
                             </div>
                         </div>
                     </div>

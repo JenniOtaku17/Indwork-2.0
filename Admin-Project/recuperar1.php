@@ -24,7 +24,7 @@
 
 include ('conexion.php');
 
-$registros=mysqli_query($conexion,"select ID from profesional where CORREO ='$_REQUEST[correo]'") or
+$registros=mysqli_query($conexion,"select ID, nombre from profesional where CORREO ='$_REQUEST[correo]'") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 while ($reg=mysqli_fetch_array($registros))
@@ -40,10 +40,10 @@ while ($reg=mysqli_fetch_array($registros))
         or die("Problemas en el select".mysqli_error($conexion));
 
         $name = "INDWORK ACTUALIZACION";
-        $asunto = "Cambio de contrasena";
-        $msg = "Hemos actualizado su contrasena, su nueva contrasena es: ".$password;
-        $header = "From: indworkcompany@gmail.com";
-        $mail = mail($correo,$asunto,$msg,$header);
+        $asunto = "Reestablecer contraseña";
+        $msg = "Hola, has solicitado reestablecer su contraseña esta sera: ".$password;
+        $headers = "From: indworkcompany@gmail.com" . "\r\n" ;
+        $mail = mail($correo,$asunto,$msg,$headers);
 
         echo "<script> alertify.alert('INDWORK aviso','Hemos enviado una nueva contrasena a tu correo', function(){ alertify.message('OK'); window.location= 'iniciarsesion.php'; }); </script>";
 
