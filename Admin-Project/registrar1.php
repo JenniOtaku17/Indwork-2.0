@@ -59,7 +59,7 @@ mysqli_query($conexion,"insert into profesional (NOMBRE,APELLIDO,CEDULA,OFICIO,T
   $mail = new PHPMailer(true);
   
   try {
-      $mail->SMTPDebug = 0;
+      $mail->SMTPDebug = 3;
       $mail->isSMTP();
   
       $mail->Host = 'in-v3.mailjet.com';

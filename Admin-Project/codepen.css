@@ -1,0 +1,35 @@
+/**********************************************************GENERAL***************************************************************************/
+body { 
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bold;
+}
+
+.slider-selection {
+	background: #125ac5 !important;
+}
+.slider.slider-horizontal {
+    width: 50% !important;
+    height: 20px;
+}
+.slider-handle {
+	background-color: #fff !important;
+	cursor: pointer;
+	background-image: none !important;
+	-webkit-box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+	-moz-box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+	box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+}
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #bdbdbd !important;
+    text-align: center;
+    background-color: transparent !important;
+    border-radius: 4px;
+}
+.tooltip.top .tooltip-arrow {
+    display: none !important;
+}
+.slider .tooltip.top {
+    margin-top: -25px !important;
+}

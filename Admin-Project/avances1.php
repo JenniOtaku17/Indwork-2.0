@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/default.min.css"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/semantic.min.css"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/bootstrap.min.css"/>
-<title>Calificar</title>
+<title></title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
@@ -22,9 +22,9 @@
   error_reporting(0);
   include ('conexion.php');
 
-  if(isset($_REQUEST['porcentaje']) and isset($_REQUEST['descripcion'])){
+  if(isset($_REQUEST['porcentaje']) and isset($_REQUEST['comentario'])){
 
-        mysqli_query($conexion,"insert into avances (ID_CONTRA, DESCRIPCION, PORCENTAJE) values ($id_contra,'$_REQUEST[descripcion]', '$_REQUEST[porcentaje]')")
+        mysqli_query($conexion,"insert into avances (ID_CONTRA, DESCRIPCION, PORCENTAJE) values ('$id_contra','$_REQUEST[comentario]', '$_REQUEST[porcentaje]')")
           or die("Problemas en el select".mysqli_error($conexion));
 
           echo "<script> alertify.alert('INDWORK aviso','Avance agregado con exito!',
