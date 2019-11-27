@@ -183,7 +183,6 @@ echo"
   <th>Descripcion</th>
   <th>Fecha</th>
   <th>Terminar Trabajo</th>
-  <th>Avances</th>
   </tr>
 
   </thead>
@@ -213,8 +212,8 @@ echo"
 <td>{$tb['ASUNTO']}</td>
 <td>{$tb['DESCRIPCION']}</td>
 <td>{$tb['FECHA_INICIO']}</td>
-<td> <a href ='solicitudes.php?id=".$id_contra."&estado=".$terminar."&usuario=".$id."' class ='btn btn-success'>Terminar</a> </td>
-<td> <a href ='codepen.php?id=".$id_contra."' class ='btn btn-success'>Avance</a></td>
+<td> <a href ='avances.php?id=".$id_contra."' class ='btn btn-success'>Agregar Avance</a>
+<a href ='solicitudes.php?id=".$id_contra."&estado=".$terminar."&usuario=".$id."' class ='btn btn-success'>Terminar</a> </td>
 
 </tr>";
 
@@ -240,7 +239,6 @@ echo"
   <th>Asunto</th>
   <th>Descripcion</th>
   <th>Fecha</th>
-  <th>Avance</th>
 
   </tr>
 
@@ -267,7 +265,6 @@ echo"
 <td>{$tb['ASUNTO']}</td>
 <td>{$tb['DESCRIPCION']}</td>
 <td>{$tb['FECHA_INICIO']}</td>
-<td> <a href ='progress.php?id=".$id_contra."' class ='btn btn-success'>Avance</a></td>
 
 
 </tr>";
