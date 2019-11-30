@@ -48,7 +48,7 @@
     <div class="col-sm-9 col-8">
 
     <!-- section 1 -->
-      <div id="section1" class="bg-info"> 
+      <div id="section1"> 
       <br><h2 align="center" class="tema-tabla">Trabajos Recibidos</h2><br>
   <table class = 'table table-stripped'>
 
@@ -92,11 +92,11 @@ echo"
 <td>{$tr['DESCRIPCION']}</td>";
 
 if($tr['ESTADO'] == 'Valorado') {
-  echo "<td> <a href ='EditarCalificacion.php?id_contra=".$id_contra."' class ='btn btn-success'>Editar Valoracion</a> </td>
+  echo "<td> <a href ='EditarCalificacion.php?id_contra=".$id_contra."' class ='btn btn-primary'>Editar Valoracion</a> </td>
 
   </tr>";
 }else{
-  echo "<td> <a href ='calificar.php?id_contra=".$id_contra."' class ='btn btn-success'>Valorar Trabajo</a> </td>
+  echo "<td> <a href ='calificar.php?id_contra=".$id_contra."' class ='btn btn-primary'>Valorar Trabajo</a> </td>
 
   </tr>";
 }
@@ -112,7 +112,7 @@ if($tr['ESTADO'] == 'Valorado') {
       </div>
 
       <!-- section 2 -->
-      <div id="section2" class="bg-info"> 
+      <div id="section2"> 
       <br><h2 align="center" class="tema-tabla">Solicitudes de Trabajos</h2><br>
       <table class = 'table table-stripped'>
       
@@ -170,7 +170,7 @@ echo"
       </div>  
 
       <!-- section 3 -->    
-      <div id="section3" class="bg-info">         
+      <div id="section3">         
       <br><h2 align="center" class="tema-tabla">Trabajos en Progreso (emitidos)</h2><br>
   <table class = 'table table-stripped'>
 
@@ -183,6 +183,7 @@ echo"
   <th>Descripcion</th>
   <th>Fecha</th>
   <th>Terminar Trabajo</th>
+  <th>Avances</th>
   </tr>
 
   </thead>
@@ -190,10 +191,7 @@ echo"
   <tbody>
   <?php 
 
-$rg=mysqli_query($conexion,"Select c.ID, c.ID_EMISOR,c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO
-From contratos c inner join profesional p
-On c.ID_EMISOR = p.ID
- where id_receptor = '$id' and ESTADO= 'Aceptado'") or
+$rg=mysqli_query($conexion,"Select c.ID, sum(a.PORCENTAJE), c.ID_EMISOR, c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO From contratos c inner join profesional p On c.ID_EMISOR = p.ID inner join avances a On c.ID = a.ID_CONTRA where c.id_receptor ='$id' and c.ESTADO= 'Aceptado' group by c.ID") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 while($tb =mysqli_fetch_array($rg)){
@@ -201,21 +199,16 @@ while($tb =mysqli_fetch_array($rg)){
 $id_contra = $tb['ID'];
 $terminar = 'terminar';
 
-mysqli_query($conexion,"update contratos set ESTADO = 'visto' where ESTADO =' ' and ID = $id_contra ")
-  or die("Problemas en el select".mysqli_error($conexion));
-
-echo"
-
-<tr>
-
+echo"<tr>
 <td>{$tb['NOMBRE']} {$tb['APELLIDO']}</td>
 <td>{$tb['ASUNTO']}</td>
 <td>{$tb['DESCRIPCION']}</td>
 <td>{$tb['FECHA_INICIO']}</td>
-<td> <a href ='avances.php?id=".$id_contra."' class ='btn btn-success'>Agregar Avance</a>
-<a href ='solicitudes.php?id=".$id_contra."&estado=".$terminar."&usuario=".$id."' class ='btn btn-success'>Terminar</a> </td>
+<td> <a href ='avances.php?id=".$id_contra."' class ='btn btn-primary'>+Avance</a>
+<a href ='solicitudes.php?id=".$id_contra."&estado=".$terminar."&usuario=".$id."' class ='btn btn-primary'>Terminar</a> </td>
+</th><th><a href ='avances2.php?id=".$id_contra."' class ='btn btn-primary'>Mis avances</a><progress value= ".$tb['sum(a.PORCENTAJE)']." max= '100' ></progress>
 
-</tr>";
+</tr> ";   
 
 }
 
@@ -223,11 +216,11 @@ echo"
 
 </tbody>
 </table>
-
+<br>
       </div>
 
             <!-- section 4 -->    
-            <div id="section4" class="bg-info">         
+            <div id="section4">         
       <br><h2 align="center" class="tema-tabla">Trabajos en Progreso (Recibidos)</h2><br>
   <table class = 'table table-stripped'>
 
@@ -239,6 +232,7 @@ echo"
   <th>Asunto</th>
   <th>Descripcion</th>
   <th>Fecha</th>
+  <th>Avances</th>
 
   </tr>
 
@@ -247,10 +241,7 @@ echo"
   <tbody>
   <?php 
 
-$rg=mysqli_query($conexion,"Select c.ID, c.ID_RECEPTOR,c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO
-From contratos c inner join profesional p
-On c.ID_RECEPTOR = p.ID
- where id_EMISOR = '$id' and ESTADO= 'Aceptado'") or
+$rg=mysqli_query($conexion,"Select c.ID, sum(a.PORCENTAJE), c.ID_EMISOR, c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO From contratos c inner join profesional p On c.ID_EMISOR = p.ID inner join avances a On c.ID = a.ID_CONTRA where c.ID_EMISOR ='$id' and c.ESTADO= 'Aceptado' group by c.ID") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 while($tb =mysqli_fetch_array($rg)){
@@ -265,7 +256,7 @@ echo"
 <td>{$tb['ASUNTO']}</td>
 <td>{$tb['DESCRIPCION']}</td>
 <td>{$tb['FECHA_INICIO']}</td>
-
+<th><a href ='avances3.php?id=".$id_contra."' class ='btn btn-primary'>Ver avances</a><progress value= ".$tb['sum(a.PORCENTAJE)']." max= '100' ></progress>
 
 </tr>";
 
@@ -279,7 +270,7 @@ echo"
       </div>
 
       <!-- section 5 -->
-      <div id="section5" class="bg-info">         
+      <div id="section5">         
       <br><h2 align="center" class="tema-tabla">Trabajos Realizados</h2><br>
   <table class = 'table table-stripped'>
 

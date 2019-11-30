@@ -42,7 +42,7 @@ if(isset($_SESSION['user'])){
 
 
             <li class='nav-item'>
-                <a class='nav-link' href='buscar.php'>Buscar</a>
+                <a class='nav-link' href='contacto.php'>Contactos</a>
             </li>
             <li class='nav-item '>
 
@@ -55,6 +55,10 @@ if(isset($_SESSION['user'])){
                <li class='nav-item'>
                <a href='cerrarsession.php'><i class='fas fa-sign-out-alt fa-2x' ></i></a>
                   </li>
+                  
+            <li class='nav-item'>
+            <a class='nav-link' href='buscar.php'>Buscar</a>
+        </li>
         </ul>
         </nav>" ;
 
@@ -87,6 +91,9 @@ if(isset($_SESSION['user'])){
                   <li class='nav-item'>
                       <a href='cerrarsession.php'><i class='fas fa-sign-out-alt fa-2x' ></i></a>
                   </li>
+                  <li class='nav-item'>
+                  <a class='nav-link' href='contacto.php'>Contactos</a>
+                  </li>
               </ul>
               </nav>" ;
             }
@@ -103,6 +110,9 @@ if(isset($_SESSION['user'])){
         </li>
         <li class="nav-item">
             <a class="nav-link" href="buscar.php">Visitante</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="contacto.php">Contactos</a>
         </li>
 
     </ul>

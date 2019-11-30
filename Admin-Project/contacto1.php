@@ -19,29 +19,20 @@
 
 <?php
   include ('navbar.php');
-
-  $idreceptor = $_REQUEST['idreceptor'];
-
+  error_reporting(0);
   include ('conexion.php');
 
-  if(isset($_SESSION['user'])){
+  if(isset($_REQUEST['comentario']) and isset($_REQUEST['nombre']) and isset($_REQUEST['correo'])){
 
-  $id = $_SESSION['user'];
-        mysqli_query($conexion,"insert into contratos (ID_EMISOR,ID_RECEPTOR,DESCRIPCION,ASUNTO) values($id,$idreceptor,'$_REQUEST[descripcion]', '$_REQUEST[asunto]')")
-          or die("Problemas en el select".mysqli_error($conexion));
-        
-          
-
-
-        $mensaje = $_REQUEST['descripcion'];
-        $asunto= "INDWORK SOLICITUD: ".$_REQUEST['asunto'];
+        $mensaje = $_REQUEST['comentario'];
+        $asunto= "INDWORK SOLICITUD: ".$_REQUEST['nombre'].' correo: '.$_REQUEST['correo'];
         $correo= $_REQUEST['correoreceptor'];
 
         if(mail($correo, $asunto , $mensaje)){
-          echo "<script> alertify.alert('INDWORK aviso','Solicitud de Contrato enviada Exitosamente!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
+          echo "<script> alertify.alert('INDWORK aviso','Mensaje enviado con exito!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
         }
         else{
-          echo "<script> alertify.alert('INDWORK aviso','Error al enviar Solicitud de Contrato!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
+          echo "<script> alertify.alert('INDWORK aviso','Error al enviar mensaje!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
         }
   }
   

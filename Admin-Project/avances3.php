@@ -11,42 +11,60 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/default.min.css"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/semantic.min.css"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/bootstrap.min.css"/>
-<title>Contratar</title>
+<title>Calificar</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 
 <?php
-  include ('navbar.php');
 
-  $idreceptor = $_REQUEST['idreceptor'];
 
   include ('conexion.php');
-
-  if(isset($_SESSION['user'])){
-
-  $id = $_SESSION['user'];
-        mysqli_query($conexion,"insert into contratos (ID_EMISOR,ID_RECEPTOR,DESCRIPCION,ASUNTO) values($id,$idreceptor,'$_REQUEST[descripcion]', '$_REQUEST[asunto]')")
-          or die("Problemas en el select".mysqli_error($conexion));
-        
-          
+  session_start();
 
 
-        $mensaje = $_REQUEST['descripcion'];
-        $asunto= "INDWORK SOLICITUD: ".$_REQUEST['asunto'];
-        $correo= $_REQUEST['correoreceptor'];
+  if(isset($_GET['id'])){
 
-        if(mail($correo, $asunto , $mensaje)){
-          echo "<script> alertify.alert('INDWORK aviso','Solicitud de Contrato enviada Exitosamente!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
-        }
+    $id_contra = $_GET['id'];
+
+    $calificacion=mysqli_query($conexion,"select DESCRIPCION, PORCENTAJE, FECHA, ESTADO from avances
+    where ID_CONTRA = '$id_contra'") or
+    die("Problemas en el select:".mysqli_error($conexion));
+
+
+    while($reg =mysqli_fetch_array($calificacion)){
+
+      echo '
+      <div class="container" >
+      <br><br>';
+      
+      $aceptar = 'aceptar';
+      $rechazar = "rechazar";
+
+      if($reg['ESTADO'] == NULL){
+
+       echo ' <div class="media-body">
+            <h4>'.$reg['PORCENTAJE'].'% <small><i>'.' realizado en '.$reg['FECHA'].'</i></small></h4>
+            <td> <a href ="aprobacion.php?id='.$id_contra.'&estado='.$aceptar.'" class ="btn btn-success">O</a> </td>
+            <td> <a href ="aprobacion.php?id='.$id_contra.'&estado='.$rechazar.'" class ="btn btn-danger">X</a> </td>
+            <p>'.$reg['DESCRIPCION'].'</p>
+            
+        </div>
+        </div>';
+      }
         else{
-          echo "<script> alertify.alert('INDWORK aviso','Error al enviar Solicitud de Contrato!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
+          echo ' <div class="media-body">
+          <h4>'.$reg['PORCENTAJE'].'% <small><i>'.' realizado en '.$reg['FECHA'].'</i></small></h4>
+          <p>'.$reg['DESCRIPCION'].'</p>
+          
+      </div>
+      </div>';
+
         }
+    }
+
   }
-  
-  
-	
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

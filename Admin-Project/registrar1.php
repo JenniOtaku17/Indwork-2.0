@@ -31,8 +31,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-  //error_reporting(0);
+  error_reporting(0);
   if(isset($_POST['registrar']))
   {
     $nombre = $_FILES['cv']['name'];
@@ -47,7 +46,7 @@ use PHPMailer\PHPMailer\Exception;
 include ('conexion.php');
 $telefono = $_REQUEST['prefijo'].$_REQUEST['telefono'];
     if ($_REQUEST['password']== $_REQUEST['repassword']){
-if( isset($_REQUEST['nombre']) and isset($_REQUEST['cedula']) and isset($_REQUEST['apellido']) and isset($_REQUEST['oficio']) and isset($_REQUEST['tipodeusuario']) and isset($_REQUEST['pais']) and isset($_FILES['foto']) and isset($nombre) and isset($_REQUEST['telefono']) and isset($_REQUEST['direccion']) and isset($_REQUEST['correo']) and isset($_REQUEST['password']) and isset($_REQUEST['region']) and isset($_REQUEST['me']) and isset($_REQUEST['fb'])){
+if( isset($_REQUEST['nombre']) and isset($_REQUEST['cedula']) and isset($_REQUEST['apellido']) and isset($_REQUEST['oficio']) and isset($_REQUEST['tipodeusuario']) and isset($_REQUEST['pais']) and isset($_FILES['foto']) and isset($nombre) and isset($_REQUEST['telefono']) and isset($_REQUEST['direccion']) and isset($_REQUEST['correo']) and isset($_REQUEST['password']) and isset($_REQUEST['region']) and isset($_REQUEST['me']) and isset($_REQUEST['fb']) and filter_var($_REQUEST['correo'], FILTER_VALIDATE_EMAIL)){
 $img = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
 mysqli_query($conexion,"insert into profesional (NOMBRE,APELLIDO,CEDULA,OFICIO,TIPODEUSUARIO,PAIS,FOTO,CV,TELEFONO,DIRECCION,CORREO,PASSWORD,REGION,ME,FB) values
                        ('$_REQUEST[nombre]','$_REQUEST[apellido]','$_REQUEST[cedula]', '$_REQUEST[oficio]', '$_REQUEST[tipodeusuario]','$_REQUEST[pais]','$img','$nombre', $telefono, '$_REQUEST[direccion]','$_REQUEST[correo]','$_REQUEST[password]','$_REQUEST[region]','$_REQUEST[me]','$_REQUEST[fb]')")

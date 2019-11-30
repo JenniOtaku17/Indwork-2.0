@@ -44,7 +44,7 @@ while ($reg=mysqli_fetch_array($registros))
 
 
 <section class="container" align="center">
-
+<br>
 <?php
 
 	echo '<div class="container">
@@ -102,8 +102,8 @@ while ($reg=mysqli_fetch_array($registros))
 		</div>
 		
 		
-		<h2>Listado de Trabajos</h2><br>
-		<iframe  class="spytest" src="vssolicitudes.php" style="margin-bottom:10px;border:1px solid #ebebeb;border-radius:4px; width:97%; height:450px;" scrolling="yes" frameborder="0"></iframe>
+		<br><br>
+		<iframe  class="spytest" src="vssolicitudes.php" style="margin-bottom:10px;border:1px solid #ebebeb;border-radius:4px; width:97%; height:500px;" scrolling="yes" frameborder="0"></iframe>
 		
 		</div>';
 
