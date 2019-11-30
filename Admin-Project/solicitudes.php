@@ -32,11 +32,23 @@ include ('conexion.php');
 
         }
         $fecha = date('Y-m-d H:i:s');
+        else if($estado == 'rechazar'){
+
+      
+          $registrost=mysqli_query($conexion,"Update contratos set ESTADO = 'Denegado' where ID= '$_GET[id]' ") or
+            die("Problemas en el select:".mysqli_error($conexion));
+  
+            echo "<script> alertify.alert('INDWORK aviso','Solicitud rechazada con exito!',
+   function(){ alertify.message('OK'); window.location= 'vssolicitudes.php?id=".$usuario."'; }); </script>";
+  
+      }
 
     $terminados=mysqli_query($conexion,"select sum(porcentaje) from avances where ID_CONTRA = $id") or
     die("Problemas en el select:".mysqli_error($conexion));
 
-    
+    while($ter =mysqli_fetch_array($terminados)){
+
+    while($ter['sum(porcentaje)'] == 100)
 
     if($estado == 'terminar'){
       $registrost=mysqli_query($conexion,"Update contratos set ESTADO = 'Terminado',FECHA_FIN = '$fecha'  where ID= '$_GET[id]' ") or
@@ -45,17 +57,8 @@ include ('conexion.php');
         echo "<script> alertify.alert('INDWORK aviso','Trabajo terminado!',
        function(){ alertify.message('OK'); window.location= 'vssolicitudes.php?id=".$id."'; }); </script>";
       
-          }else if($estado == 'rechazar'){
-
-      
-              $registrost=mysqli_query($conexion,"Update contratos set ESTADO = 'Denegado' where ID= '$_GET[id]' ") or
-                die("Problemas en el select:".mysqli_error($conexion));
-      
-                echo "<script> alertify.alert('INDWORK aviso','Solicitud rechazada con exito!',
-       function(){ alertify.message('OK'); window.location= 'vssolicitudes.php?id=".$usuario."'; }); </script>";
-      
           }
-
+        }
 }
 
 ?>
