@@ -22,7 +22,11 @@ if(isset($_GET['id'])){
 
 $id_contra= $_GET['id'];
 
-echo '<h2 align="center">Da a conocer tu avance!</h2><br>
+echo '
+<div align="left">
+<a href="vssolicitudes.php"><button  class="btn btn-primary mb-2 primary">Cancelar</button></a>
+</div><br>
+<h2 align="center">Da a conocer tu avance!</h2><br>
 	<form action="avances1.php?id='.$id_contra.'" method="post">
 
 	<label class="mr-sm-2">Porcentaje Avanzado:</label>

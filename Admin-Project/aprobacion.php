@@ -21,7 +21,7 @@ include ('conexion.php');
 
     if($estado == 'aceptar'){
 
-    $registrost=mysqli_query($conexion,"Update contratos set ESTADO = 'Aprobado' where ID= '$_GET[id]' ") or
+    $registrost=mysqli_query($conexion,"Update avances set ESTADO = 'Aprobado' where ID_CONTRA= '$_GET[id_contra]' and ID= '$_GET[id]'") or
       die("Problemas en el select:".mysqli_error($conexion));
 
       echo "<script> alertify.alert('INDWORK aviso','Avance aprobado!',
@@ -31,7 +31,7 @@ include ('conexion.php');
        
     if($estado == 'rechazar'){
 
-      $registrost=mysqli_query($conexion,"Update contratos set ESTADO = 'Denegado'  where ID= '$_GET[id]' ") or
+      $registrost=mysqli_query($conexion,"Update avances set ESTADO = 'Denegado'  where ID_CONTRA= '$_GET[id]' ") or
         die("Problemas en el select:".mysqli_error($conexion));
       
         echo "<script> alertify.alert('INDWORK aviso','Avance denegado!',

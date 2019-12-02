@@ -308,6 +308,7 @@ echo"
 <td>{$tb['FECHA_INICIO']}</td>
 <td>{$tb['FECHA_FIN']}</td>
 
+
 </tr>";
 
 }

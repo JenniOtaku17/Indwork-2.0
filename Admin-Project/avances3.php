@@ -28,26 +28,34 @@
 
     $id_contra = $_GET['id'];
 
-    $calificacion=mysqli_query($conexion,"select DESCRIPCION, PORCENTAJE, FECHA, ESTADO from avances
+    $calificacion=mysqli_query($conexion,"select ID, DESCRIPCION, PORCENTAJE, FECHA, ESTADO from avances
     where ID_CONTRA = '$id_contra'") or
     die("Problemas en el select:".mysqli_error($conexion));
 
+    $registrost=mysqli_query($conexion,"Update avances set ESTADO = 'visto' where ID_CONTRA = '$id_contra'") or
+      die("Problemas en el select:".mysqli_error($conexion));
+
+    echo '<br>
+    <div class="container" >
+
+    <a href="vssolicitudes.php"><button  class="btn btn-primary mb-2 primary">Cancelar</button></a>
+
+    <br>';
 
     while($reg =mysqli_fetch_array($calificacion)){
 
-      echo '
-      <div class="container" >
-      <br><br>';
+
       
       $aceptar = 'aceptar';
       $rechazar = "rechazar";
+      $id = $reg['ID'];
 
       if($reg['ESTADO'] == NULL){
 
        echo ' <div class="media-body">
             <h4>'.$reg['PORCENTAJE'].'% <small><i>'.' realizado en '.$reg['FECHA'].'</i></small></h4>
-            <td> <a href ="aprobacion.php?id='.$id_contra.'&estado='.$aceptar.'" class ="btn btn-success">O</a> </td>
-            <td> <a href ="aprobacion.php?id='.$id_contra.'&estado='.$rechazar.'" class ="btn btn-danger">X</a> </td>
+            <td> <a href ="aprobacion.php?id_contra='.$id_contra.'&estado='.$aceptar.'&id='.$id.'" class ="btn btn-success">O</a> </td>
+            <td> <a href ="aprobacion.php?id_contra='.$id_contra.'&estado='.$aceptar.'&id='.$id.'" class ="btn btn-danger">X</a> </td>
             <p>'.$reg['DESCRIPCION'].'</p>
             
         </div>

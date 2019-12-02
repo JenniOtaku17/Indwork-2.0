@@ -33,11 +33,16 @@
     die("Problemas en el select:".mysqli_error($conexion));
 
 
+echo '       <div class="container" ><br>
+
+<a href="vssolicitudes.php"><button  class="btn btn-primary mb-2 primary">Cancelar</button></a>
+';
+
     while($reg =mysqli_fetch_array($calificacion)){
 
         echo '
-        <div class="container" >
-        <br><br>
+ 
+        <br>
         
         <div class="media-body">
             <h4>'.$reg['PORCENTAJE'].'% <small><i>'.' realizado en '.$reg['FECHA'].'</i></small></h4>

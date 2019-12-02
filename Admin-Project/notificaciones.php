@@ -11,4 +11,12 @@ $count = 0;
     $count = $count +1;
   } 
 
+$avances =  mysqli_query($conexion,"Select a.ID from avances a inner join contratos c on c.ID = a.ID_CONTRA where c.id_receptor = '$id' and a.ESTADO= ' ' group by a.ID") or
+  die("Problemas en el select:".mysqli_error($conexion));
+
+$avs = 0;
+  while($avance =mysqli_fetch_array($avances)){
+    $avs = $avs +1;
+  }
+
 ?>
