@@ -29,10 +29,10 @@
         $correo= $_REQUEST['correoreceptor'];
 
         if(mail($correo, $asunto , $mensaje)){
-          echo "<script> alertify.alert('INDWORK aviso','Mensaje enviado con exito!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
+          echo "<script> alertify.alert('INDWORK aviso','Mensaje enviado con exito!', function(){ alertify.message('OK'); window.location= 'index.php'; }); </script>";
         }
         else{
-          echo "<script> alertify.alert('INDWORK aviso','Error al enviar mensaje!', function(){ alertify.message('OK'); window.location= 'perfil.php?id=".$idreceptor."'; }); </script>";
+          echo "<script> alertify.alert('INDWORK aviso','Error al enviar mensaje!', function(){ alertify.message('OK'); window.location= 'index.php'; }); </script>";
         }
   }
   

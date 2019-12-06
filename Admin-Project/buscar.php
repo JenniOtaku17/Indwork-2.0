@@ -95,7 +95,7 @@ box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
     <div class="contenedor ">
         <!--<img src="img/buscar2.jpg" alt="" width="100%">-->
         <div class="buscador ">
-            <h1 class="titulo">Buscas a un Profesional?</h1>
+
             <form action=""  autocomplete= "off" class="formulario" id= "form-search">
                 
     <input align="center" type="text" name="op" method="post"  id = "op" class="buscador-text" placeholder="Dime el oficio que deseas buscar">
@@ -107,7 +107,7 @@ box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
 
             <div id = "respuesta-q">
                 <div class="cont-buscar">
-                    <img src="img/buscar-vector.png" class="img-buscar">
+                    <img src="img/infopro.png" class="img-buscar">
                     <h1 class="titulo">Buscas a un Profesional?</h1>
                 </div>
             

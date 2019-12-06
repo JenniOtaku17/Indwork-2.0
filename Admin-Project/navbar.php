@@ -25,6 +25,8 @@ if(isset($_SESSION['user'])){
 
   include ('conexion.php');
   include ('notificaciones.php');
+  include ('nt_real.php');
+
 
 
   if($count>0){
@@ -100,44 +102,6 @@ if(isset($_SESSION['user'])){
       
               }
             }
-            if($count>0 and $avs>0){
-  $usuario=mysqli_query($conexion,"select NOMBRE, APELLIDO, FOTO FROM profesional WHERE ID = $id ")or
-  die("Problemas en el select:".mysqli_error($conexion));
-
-  while ($us=mysqli_fetch_array($usuario))
-        {
-
-        $foto = $us['FOTO'];
-
-        echo "<nav class='navbar fixed-top bg-dark' width='100%'>
-        <a href='index.php'><img src='img/logo.png' height='50px' width=220px'></a>
-        <ul class='navbar nav justify-content-end text-white'>
-
-
-            <li class='nav-item'>
-                <a class='nav-link' href='contacto.php'>Contactos</a>
-            </li>
-            <li class='nav-item '>
-
-                <a class='nav-link perfil-nav' href='iniciarseccion.php'><img class='foto-nav' src='data:image/jpg;base64,".base64_encode($foto)."'>{$us['NOMBRE']} {$us['APELLIDO']}</a>
-
-            </li>
-
-            <i class='fas fa-2x fa-bell icon-white badge' style='color:#64FF32; margin: 0px 4px'>$count</i>
-            <i class='fas fa-2x fa-bell icon-white badge' style='color:#64FF32; margin: 0px 4px'>$avs</i>
-
-               <li class='nav-item'>
-               <a href='cerrarsession.php'><i class='fas fa-sign-out-alt fa-2x' ></i></a>
-                  </li>
-                  
-            <li class='nav-item'>
-            <a class='nav-link' href='buscar.php'>Buscar</a>
-        </li>
-        </ul>
-        </nav>" ;
-
-        }
-      }
       else{
         $usuario=mysqli_query($conexion,"select NOMBRE, APELLIDO, FOTO FROM profesional WHERE ID = $id ")or
         die("Problemas en el select:".mysqli_error($conexion));

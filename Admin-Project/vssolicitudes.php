@@ -244,7 +244,7 @@ echo"<tr>
   <tbody>
   <?php 
 
-$rg=mysqli_query($conexion,"Select c.ID, sum(a.PORCENTAJE), c.ID_EMISOR, c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO From contratos c inner join profesional p On c.ID_EMISOR = p.ID inner join avances a On c.ID = a.ID_CONTRA where c.ID_EMISOR ='$id' and c.ESTADO= 'Aceptado' group by c.ID") or
+$rg=mysqli_query($conexion,"Select c.ID, sum(a.PORCENTAJE), c.ID_RECEPTOR, c.FECHA_INICIO, p.NOMBRE , p.APELLIDO, c.DESCRIPCION, c.ASUNTO From contratos c inner join profesional p On c.ID_RECEPTOR = p.ID inner join avances a On c.ID = a.ID_CONTRA where c.ID_EMISOR ='$id' and c.ESTADO= 'Aceptado' group by c.ID") or
   die("Problemas en el select:".mysqli_error($conexion));
 
 while($tb =mysqli_fetch_array($rg)){

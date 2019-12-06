@@ -57,7 +57,7 @@ include ('conexion.php');
        function(){ alertify.message('OK'); window.location= 'vssolicitudes.php?id=".$id."'; }); </script>";
       
           }else{
-            echo "<script> alertify.alert('INDWORK aviso','No fue posible terminar el trabajo!',
+            echo "<script> alertify.alert('INDWORK aviso','Debe tener un 100% de trabajo aprobado para esta accion!',
        function(){ alertify.message('OK'); window.location= 'vssolicitudes.php?id=".$id."'; }); </script>";
           }
         }
