@@ -14,6 +14,9 @@
 
 <body>
 
+
+
+
 <br>
 <br>
 <br>
@@ -181,6 +184,57 @@
 
 </style>
 
+<style>
+* { box-sizing:border-box; }
+.buscador {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 150px;
+    z-index: 99;
+}
+
+.formulario {
+    width: 100%;
+    padding: 10px;
+    position: fixed;
+    z-index: 99;
+    text-align: center;
+    margin-top: 30px;
+    background-color: #4B4A4A;
+    -webkit-box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
+box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
+}
+
+.buscador-text {
+    width: 50%;
+    border-style: none;
+    outline: none;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 0 auto;
+    transition-duration: 0.4s;
+    -webkit-box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
+}
+
+.buscador-text:focus {
+    border: 2px solid #169BD5;
+    transition-duration: 0.4s;
+}
+
+</style>
+
 
 <?php
 
@@ -195,6 +249,15 @@ $buscar = $_POST['op'];
 
 $registros=mysqli_query($conexion,"select NOMBRE,APELLIDO,OFICIO,FOTO, ID from profesional where OFICIO LIKE '%$buscar%' or NOMBRE  LIKE '%$buscar%' or REGION LIKE '$buscar' or PAIS like '%$buscar%' or ME LIKE '%$buscar%' or APELLIDO LIKE '%$buscar%'") or
   die("Problemas en el select:".mysqli_error($conexion));
+
+  
+//numero de personas por pagina
+$personas_x_paginas = 4;
+
+//numero de paginas
+$personas = $registros->num_rows;
+$paginas = $personas/$personas_x_paginas;
+$paginas = ceil($paginas);
 
 
 while ($reg=mysqli_fetch_array($registros))
@@ -233,11 +296,26 @@ while ($reg=mysqli_fetch_array($registros))
     </div>
 	</div>
   </tr></tbody></table></div>
+
+  
   
   ';
   
 
-}}
+}
+
+echo '<nav aria-label="Page navigation example">
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+  ';
+  for($i = 1; $i <= $paginas; $i++){ 
+    echo '<li class="page-item"><a class="page-link" href="buscar.php?pagina='.$i.'">'.$i.'</a></li>';
+  }
+ echo '
+  <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+</ul>
+</nav>';
+}
 
 else{
 

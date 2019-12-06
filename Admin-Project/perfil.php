@@ -1,3 +1,8 @@
+<?php
+	include ('navbar.php');
+?>
+
+
 <!doctype html>
 <html>
 <head>
@@ -21,9 +26,6 @@
 <body>
 
   <!-----------------Navigation------------------->
-<?php
-	include ('navbar.php');
-?>
 
 <br>
 <br>
@@ -32,6 +34,149 @@
 
 <section class="container" align="center">
 
+<style>
+
+* { box-sizing:border-box; }
+
+.valoracion{
+	width: 100%;
+	display: block;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+
+.texto-c {
+    /*text-align: left;*/
+    font-size: 1.2em;
+    font-weight: 600;
+	margin-right: 15px;
+
+}
+
+.minimenu{
+	width: 100%;
+}
+
+.cuadro {
+    width: 90%;
+    margin: 75px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.cuadro-izquierda {
+	width: 29%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.perfil-contactar{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+}
+
+	@media screen and (max-width: 800px){
+		.cuadro {
+    width: 100%;
+    margin: 75px auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.foto {
+    width: 80%;
+    max-width: 200px;
+    border-radius: 200px;
+	clip-path: circle(40% at 50% 50%);
+	margin: 0px auto;
+}
+
+.cuadro-izquierda {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.cuadro-derecha {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.borde-oscuro {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+	box-shadow: none;
+	width: 100%;
+    margin: 75px 0;
+	display: flex;
+	font-size: 1em;
+    flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content:baseline;
+	align-items: baseline;
+}
+
+.datos-izquierda {
+    display: flex;
+    flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+    width: 29%;
+}
+
+.datos-derecha {
+    display: flex;
+    flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+    width: 100%;
+}
+
+.datos-d {
+    text-align: left;
+    width: 80%;
+    margin: 20px auto;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.visible {
+    display: none;
+}
+
+.invisible {
+    display: block;
+}
+
+.datos-p {
+    text-align: left;
+    width: 80%;
+    margin: 20px auto;
+    font-size: 1em;
+    font-weight: 300;
+}
+
+.valoracion{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+	}
+
+
+
+</style>
 
 
 
@@ -54,8 +199,7 @@ while ($reg=mysqli_fetch_array($registros))
 			<img class="foto" src="data:image/jpg;base64,'.base64_encode($reg['FOTO']).'" alt="">
 		</div>
 		<div class="cuadro-derecha ">
-		<a href="https://api.whatsapp.com/send?phone='.$reg['TELEFONO'].'"><img src="img/whatsapp.png" width="50" height="50"></a>
-		<a href="'.$reg['FB'].'"><img src="img/facebook.png" width="50" height="50"></a>
+		
 			<div>
 				<p class="nombre-perfil">'.$reg['NOMBRE'].' '.$reg['APELLIDO'].'</p>
 			</div>
@@ -65,6 +209,13 @@ while ($reg=mysqli_fetch_array($registros))
 			<div>
 				<p class="descripcion">'.$reg['ME'].'</p>
 			</div>
+			<div align="right">
+				
+				<span class="texto-c">Contacto:</span> 
+				<a href="https://api.whatsapp.com/send?phone='.$reg['TELEFONO'].'"><img src="img/whatsapp.png" width="40" height="40"></a>
+				<a href="'.$reg['FB'].'"><img src="img/facebook.png" width="50" height="50"></a>
+			
+				</div>
 		</div>
 	</div>
 

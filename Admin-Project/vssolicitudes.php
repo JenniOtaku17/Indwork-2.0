@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="css/fontawesome.min.css" rel="stylesheet">
+<link href="fontawesome/css/brands.css" rel="stylesheet">
+<link href="fontawesome/css/solid.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -256,7 +259,7 @@ echo"
 <td>{$tb['ASUNTO']}</td>
 <td>{$tb['DESCRIPCION']}</td>
 <td>{$tb['FECHA_INICIO']}</td>
-<th><a href ='avances3.php?id=".$id_contra."' class ='btn btn-primary'>Ver avances</a><progress value= ".$tb['sum(a.PORCENTAJE)']." max= '100' ></progress>
+<th><a href ='avances3.php?id=".$id_contra."' style='color: green;'><i class='fas fa-circle-notch'></i> Ver avances</a><progress value= ".$tb['sum(a.PORCENTAJE)']." max= '100' ></progress>
 
 </tr>";
 

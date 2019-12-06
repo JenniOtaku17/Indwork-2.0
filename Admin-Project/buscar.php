@@ -28,25 +28,41 @@
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+    align-items: center;
     position: fixed;
+    height: 150px;
 }
 
 .formulario {
-    width: 60%;
+    width: 100%;
     padding: 10px;
     position: fixed;
     z-index: 99;
     text-align: center;
+    margin-top: 30px;
+    background-color: #4B4A4A;
+    -webkit-box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
+box-shadow: -1px 14px 24px -19px rgba(0,0,0,0.75);
 }
 
+.titulo {
+    text-align: center;
+    color: black;
+    /*padding: 10% 0;*/
+    /*margin: 10px;*/
+}
+
+
 .buscador-text {
-    width: 100%;
+    width: 50%;
     border-style: none;
     outline: none;
     background-color: white;
     border: 1px solid white;
     border-radius: 50px;
     padding: 10px;
+    margin: 0 auto;
     transition-duration: 0.4s;
     -webkit-box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -1px 7px 16px -6px rgba(0, 0, 0, 0.75);
@@ -56,6 +72,21 @@
 .buscador-text:focus {
     border: 2px solid #169BD5;
     transition-duration: 0.4s;
+}
+
+.cont-buscar{
+    width: 50%;
+    margin: 150px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.img-buscar{
+    width: 100%;
+    max-width: 300px;
 }
 
 </style>
@@ -75,6 +106,10 @@
 <br>
 
             <div id = "respuesta-q">
+                <div class="cont-buscar">
+                    <img src="img/buscar-vector.png" class="img-buscar">
+                    <h1 class="titulo">Buscas a un Profesional?</h1>
+                </div>
             
         </div>
     </div>
